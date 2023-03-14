@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox prefHeight="220.0" prefWidth="384.0" style="-fx-background-color: #333;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.iamruda.lildesk.ShowController">
+   <children>
+      <MenuBar maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="26.0" prefWidth="384.0" stylesheets="@menu-style.css">
+         <menus>
+            <Menu mnemonicParsing="false" text="Файл">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="Редактирование" />
+                  <MenuItem mnemonicParsing="false" text="Закрыть" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Правка">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="Отменить" />
+                  <MenuItem mnemonicParsing="false" text="Повторить" />
+                  <SeparatorMenuItem mnemonicParsing="false" />
+                  <MenuItem mnemonicParsing="false" text="Вырезать" />
+                  <MenuItem mnemonicParsing="false" text="Копировать" />
+                  <MenuItem mnemonicParsing="false" text="Вставить" />
+                  <MenuItem mnemonicParsing="false" text="Удалить" />
+                  <SeparatorMenuItem mnemonicParsing="false" />
+                  <MenuItem mnemonicParsing="false" text="Выделить всё" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Справка">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="О разработчике" />
+               </items>
+            </Menu>
+         </menus>
+      </MenuBar>
+      <TableView fx:id="table" maxHeight="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="242.0" prefWidth="384.0" stylesheets="@table-style.css" VBox.vgrow="ALWAYS" />
+   </children>
+</VBox>
