@@ -12,8 +12,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.Arrays;
-import java.util.List;
+import java.util.ArrayList;
 
 public class ShowController {
 
@@ -22,14 +21,14 @@ public class ShowController {
     public class Client {
         private int idClient;
         private String fullName;
-        private String historyContract;
+        private String review;
         private String contactPhone;
         private String email;
 
-        public Client(int idClient, String fullName, String historyContract, String contactPhone, String email) {
+        public Client(int idClient, String fullName, String review, String contactPhone, String email) {
             this.idClient = idClient;
             this.fullName = fullName;
-            this.historyContract = historyContract;
+            this.review = review;
             this.contactPhone = contactPhone;
             this.email = email;
         }
@@ -42,8 +41,8 @@ public class ShowController {
             return fullName;
         }
 
-        public String getHistoryContract() {
-            return historyContract;
+        public String review() {
+            return review;
         }
 
         public String getContactPhone() {
@@ -56,10 +55,10 @@ public class ShowController {
     }
 
     public void initialize() {
-        test();
+        ;
     }
 
-    private void SQLDBClient() throws ClassNotFoundException,
+    private ArrayList<Client> getSQLClients() throws ClassNotFoundException,
             SQLException {
 
         // Получаем соединение к базе данных MySQL.
@@ -72,20 +71,54 @@ public class ShowController {
         String sql = "SELECT * FROM Client";
         ResultSet resultSet = statement.executeQuery(sql);
 
-        List<Client> newClients = Arrays.asList();
+        ArrayList<Client> listClient = new ArrayList<>();
 
         // Обрабатываем результаты запроса.
         while (resultSet.next()) {
-            int id = resultSet.getInt("IdClient");
+            int idClient = resultSet.getInt("IdClient");
             String fullName = resultSet.getString("FullName");
-            Client newClient = new Client("Иван", "Иванов");
+            String review = resultSet.getString("Review");
+            System.out.println(review);
+            String contactPhone = resultSet.getString("ContactPhone");
+            String email = resultSet.getString("Email");
+            Client newClient = new Client(idClient, fullName, review, contactPhone, email);
+            listClient.add(newClient);
         }
 
         // Закрываем соединение к базе данных.
         conn.close();
+        return listClient;
     }
 
-    private void test() {
+    public void showSQLClient() throws SQLException, ClassNotFoundException {
+        table.getColumns().clear(); // удаление всех столбцов из таблицы
+        table.getItems().clear(); // удаление всех элементов из ObservableList
+
+        TableColumn<Client, String> idCol = new TableColumn<>("ID");
+        TableColumn<Client, String> fullNameCol = new TableColumn<>("Full name");
+        TableColumn<Client, String> reviewCol = new TableColumn<>("Review");
+        TableColumn<Client, String> contactCol = new TableColumn<>("Contact phone");
+        TableColumn<Client, String> emailCol = new TableColumn<>("Email");
+
+        idCol.setCellValueFactory(new PropertyValueFactory<>("idClient"));
+        fullNameCol.setCellValueFactory(new PropertyValueFactory<>("fullName"));
+        reviewCol.setCellValueFactory(new PropertyValueFactory<>("review"));
+        contactCol.setCellValueFactory(new PropertyValueFactory<>("contactPhone"));
+        emailCol.setCellValueFactory(new PropertyValueFactory<>("email"));
+
+        table.getColumns().add(idCol);
+        table.getColumns().add(fullNameCol);
+        table.getColumns().add(reviewCol);
+        table.getColumns().add(contactCol);
+        table.getColumns().add(emailCol);
+
+        ObservableList<Client> data = FXCollections.observableArrayList(getSQLClients());
+
+        table.setItems(data);
+        table.refresh();
+    }
+
+    /* private void test() {
         TableColumn<Client, String> firstNameCol = new TableColumn<>("First Name");
         TableColumn<Client, String> lastNameCol = new TableColumn<>("Last Name");
         TableColumn<Client, String> emailCol = new TableColumn<>("Email");
@@ -101,5 +134,5 @@ public class ShowController {
         ObservableList<Client> data = FXCollections.observableArrayList();
 
         table.setItems(data);
-    }
+    } */
 }
