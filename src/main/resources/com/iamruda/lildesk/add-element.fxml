@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SplitMenuButton?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox fx:id="mainVBox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="453.0" prefWidth="600.0" style="-fx-background-color: #333; -fx-background-image: url('@icon-plus.png');" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.iamruda.lildesk.AddElemController">
+   <children>
+      <HBox alignment="CENTER" prefHeight="55.0" prefWidth="396.0">
+         <children>
+            <Label prefHeight="26.0" prefWidth="316.0" text="1. Выбор таблицы: " textFill="WHITE">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <SplitMenuButton fx:id="chooser_table" mnemonicParsing="false" prefHeight="26.0" prefWidth="188.0">
+              <items>
+                  <MenuItem fx:id="Project" mnemonicParsing="false" onAction="#chooseTable" text="Проекты" />
+                  <MenuItem fx:id="Task" mnemonicParsing="false" onAction="#chooseTable" text="Задачи" />
+                  <MenuItem fx:id="Worker" mnemonicParsing="false" onAction="#chooseTable" text="Сотрудники" />
+                  <MenuItem fx:id="ContractDev" mnemonicParsing="false" onAction="#chooseTable" text="Контракты" />
+                  <MenuItem fx:id="Client" mnemonicParsing="false" onAction="#chooseTable" text="Клиенты" />
+                  <MenuItem fx:id="TechDoc" mnemonicParsing="false" onAction="#chooseTable" text="Техдокументация" />
+                  <MenuItem fx:id="ContractWork" mnemonicParsing="false" onAction="#chooseTable" text="Трудовые договоры" />
+                  <MenuItem fx:id="Status" mnemonicParsing="false" onAction="#chooseTable" text="Статусы" />
+                  <MenuItem fx:id="ExecutorProject" mnemonicParsing="false" onAction="#chooseTable" text="Исполнители проектов" />
+                  <MenuItem fx:id="ExecutorTask" mnemonicParsing="false" onAction="#chooseTable" text="Исполнители задач" />
+              </items>
+            </SplitMenuButton>
+         </children>
+         <VBox.margin>
+            <Insets top="12.0" />
+         </VBox.margin>
+      </HBox>
+      <HBox alignment="CENTER" prefHeight="35.0" prefWidth="400.0">
+         <children>
+            <Label prefHeight="26.0" prefWidth="502.0" text="2. Заполнение данными: " textFill="WHITE">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
+      <VBox fx:id="values" alignment="CENTER" prefHeight="319.0" prefWidth="600.0">
+         <children>
+            <Label alignment="CENTER" prefHeight="16.0" prefWidth="438.0" text="Для заполнение данными выберите таблицу в пункте 1" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+         </children>
+      </VBox>
+      <HBox alignment="CENTER_RIGHT" prefHeight="37.0" prefWidth="400.0">
+         <children>
+            <Button alignment="CENTER" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#handleAddButton" prefHeight="26.0" prefWidth="72.0" text="Добавить" textAlignment="CENTER">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <HBox.margin>
+                  <Insets right="16.0" />
+               </HBox.margin>
+            </Button>
+            <Button alignment="CENTER" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#handleCloseButton" prefHeight="26.0" prefWidth="72.0" text="Отмена" textAlignment="CENTER">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <HBox.margin>
+                  <Insets right="24.0" />
+               </HBox.margin>
+            </Button>
+         </children>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <VBox.margin>
+            <Insets bottom="12.0" top="6.0" />
+         </VBox.margin>
+      </HBox>
+   </children>
+</VBox>

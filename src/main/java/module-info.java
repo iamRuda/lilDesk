@@ -13,4 +13,6 @@ module com.iamruda.lildesk {
 
     opens com.iamruda.lildesk to javafx.fxml;
     exports com.iamruda.lildesk;
+    exports com.iamruda.lildesk.tables;
+    opens com.iamruda.lildesk.tables to javafx.fxml;
 }

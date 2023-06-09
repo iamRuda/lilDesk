@@ -15,41 +15,37 @@
                <items>
                   <Menu mnemonicParsing="false" text="Открыть">
                      <items>
-                        <MenuItem mnemonicParsing="false" text="Проекты" />
-                        <MenuItem mnemonicParsing="false" text="Задачи" />
-                        <MenuItem mnemonicParsing="false" text="Сотрудники" />
-                        <MenuItem mnemonicParsing="false" text="Проекты" />
-                        <MenuItem mnemonicParsing="false" text="Контракты" />
+                        <MenuItem mnemonicParsing="false" onAction="#showSQLProject" text="Проекты" />
+                        <MenuItem mnemonicParsing="false" onAction="#showSQLTask" text="Задачи" />
+                        <MenuItem mnemonicParsing="false" onAction="#showSQLWorker" text="Сотрудники" />
+                        <MenuItem mnemonicParsing="false" onAction="#showSQLContractDev" text="Контракты" />
                         <MenuItem mnemonicParsing="false" onAction="#showSQLClient" text="Клиенты" />
-                        <MenuItem mnemonicParsing="false" text="Техдокументация" />
-                        <MenuItem mnemonicParsing="false" text="Трудовые договоры" />
-                        <MenuItem mnemonicParsing="false" text="Статусы" />
+                        <MenuItem mnemonicParsing="false" onAction="#showSQLTechDoc" text="Техдокументация" />
+                        <MenuItem mnemonicParsing="false" onAction="#showSQLContractWork" text="Трудовые договоры" />
+                        <MenuItem mnemonicParsing="false" onAction="#showSQLStatus" text="Статусы" />
+                        <MenuItem mnemonicParsing="false" onAction="#showSQLExecutorProject" text="Исполнители проектов" />
+                        <MenuItem mnemonicParsing="false" onAction="#showSQLExecutorTask" text="Исполнители задач" />
                      </items>
                   </Menu>
-                  <MenuItem mnemonicParsing="false" text="Редактирование" />
-                  <MenuItem mnemonicParsing="false" text="Закрыть" />
+                  <MenuItem mnemonicParsing="false" onAction="#handleCloseButton" text="Закрыть" />
                </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Правка">
                <items>
-                  <MenuItem mnemonicParsing="false" text="Отменить" />
-                  <MenuItem mnemonicParsing="false" text="Повторить" />
+                  <MenuItem mnemonicParsing="false" onAction="#handleAddElementWindow" text="Добавить запись" />
+                  <MenuItem mnemonicParsing="false" onAction="#handleEditElementWindow" text="Редактировать" />
+                  <MenuItem mnemonicParsing="false" onAction="#handleDeleteElementWindow" text="Удалить запись" />
                   <SeparatorMenuItem mnemonicParsing="false" />
-                  <MenuItem mnemonicParsing="false" text="Вырезать" />
-                  <MenuItem mnemonicParsing="false" text="Копировать" />
-                  <MenuItem mnemonicParsing="false" text="Вставить" />
-                  <MenuItem mnemonicParsing="false" text="Удалить" />
-                  <SeparatorMenuItem mnemonicParsing="false" />
-                  <MenuItem mnemonicParsing="false" text="Выделить всё" />
+                  <MenuItem mnemonicParsing="false" onAction="#handleFindElementWindow" text="Найти" />
                </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Справка">
                <items>
-                  <MenuItem mnemonicParsing="false" text="О разработчике" />
+                  <MenuItem mnemonicParsing="false" onAction="#handleAboutWindow" text="О разработчике" />
                </items>
             </Menu>
          </menus>
       </MenuBar>
-      <TableView fx:id="table" maxHeight="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="242.0" prefWidth="384.0" stylesheets="@table-style.css" VBox.vgrow="ALWAYS" />
+      <TableView fx:id="table" maxHeight="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="470.0" prefWidth="718.0" stylesheets="@table-style.css" VBox.vgrow="ALWAYS" />
    </children>
 </VBox>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox alignment="CENTER" style="-fx-background-color: #333;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.iamruda.lildesk.MainController">
+    <padding>
+        <Insets bottom="10.0" left="10.0" right="10.0" top="20.0" />
+    </padding>
+   <Label text=" App Lite Li'l Desk" textFill="WHITE">
+      <font>
+         <Font name="Calibri Bold" size="24.0" />
+      </font>
+   </Label>
+   <HBox alignment="TOP_CENTER" prefHeight="141.0" prefWidth="337.0">
+      <children>
+         <Label prefHeight="134.0" prefWidth="338.0" text="Это программное обеспечение создано в ознакомительных и обучающих целях. Оно никого не пытается оскорбить или кому-то навредить. Любые совпадения - чистая случайность. Приятного использования!" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+            <font>
+               <Font size="14.0" />
+            </font>
+         </Label>
+      </children>
+   </HBox>
+   <HBox alignment="TOP_CENTER" prefHeight="24.0" prefWidth="338.0">
+      <children>
+         <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="34.0" prefWidth="338.0" text="Автор: iAmRuda; URL: https://github.com/iamRuda" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+            <font>
+               <Font size="14.0" />
+            </font>
+         </Label>
+      </children>
+   </HBox>
+</VBox>
