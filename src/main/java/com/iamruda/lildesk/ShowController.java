@@ -44,10 +44,11 @@ import javafx.stage.StageStyle;
 public class ShowController {
 
     @FXML private TableView table;
+    private static ArrayList<Map<String, Object>> listObject = new ArrayList<>();
+    private static String currentTable = null;
+    private static boolean updateTableLock = false;
 
-    public void initialize() {
-        ;
-    }
+    public void initialize() {;}
 
     private ArrayList<Client> getSQLClients() throws ClassNotFoundException,
             SQLException {
@@ -106,6 +107,8 @@ public class ShowController {
 
         table.setItems(data);
         table.refresh();
+        currentTable = "Client";
+        updateTableLock = false;
     }
 
     private ArrayList<ContractDev> getSQLContractDev() throws ClassNotFoundException,
@@ -165,6 +168,8 @@ public class ShowController {
 
         table.setItems(data);
         table.refresh();
+        currentTable = "ContractDev";
+        updateTableLock = false;
     }
 
     private ArrayList<TechDoc> getSQLTechDoc() throws ClassNotFoundException,
@@ -212,6 +217,8 @@ public class ShowController {
 
         table.setItems(data);
         table.refresh();
+        currentTable = "TechDoc";
+        updateTableLock = false;
     }
 
     private ArrayList<Worker> getSQLWorker() throws ClassNotFoundException,
@@ -276,6 +283,8 @@ public class ShowController {
 
         table.setItems(data);
         table.refresh();
+        currentTable = "Worker";
+        updateTableLock = false;
     }
 
     private ArrayList<Project> getSQLProject() throws ClassNotFoundException,
@@ -335,6 +344,8 @@ public class ShowController {
 
         table.setItems(data);
         table.refresh();
+        currentTable = "Project";
+        updateTableLock = false;
     }
 
     private ArrayList<ContractWork> getSQLContractWork() throws ClassNotFoundException,
@@ -398,6 +409,8 @@ public class ShowController {
 
         table.setItems(data);
         table.refresh();
+        currentTable = "ContractWork";
+        updateTableLock = false;
     }
 
     private ArrayList<Task> getSQLTask() throws ClassNotFoundException,
@@ -477,6 +490,8 @@ public class ShowController {
 
         table.setItems(data);
         table.refresh();
+        currentTable = "Task";
+        updateTableLock = false;
     }
 
     private ArrayList<Status> getSQLStatus() throws ClassNotFoundException,
@@ -528,6 +543,8 @@ public class ShowController {
 
         table.setItems(data);
         table.refresh();
+        currentTable = "Status";
+        updateTableLock = false;
     }
 
     private ArrayList<ExecutorProject> getSQLExecutorProject() throws ClassNotFoundException,
@@ -579,6 +596,8 @@ public class ShowController {
 
         table.setItems(data);
         table.refresh();
+        currentTable = "ExecutorProject";
+        updateTableLock = false;
     }
 
     private ArrayList<ExecutorTask> getSQLExecutorTask() throws ClassNotFoundException,
@@ -630,26 +649,61 @@ public class ShowController {
 
         table.setItems(data);
         table.refresh();
+        currentTable = "ExecutorTask";
+        updateTableLock = false;
     }
 
-    public void showSQLQuery(ArrayList<Map<String, Object>> listObject) throws SQLException, ClassNotFoundException {
-        table.getColumns().clear(); // удаление всех столбцов из таблицы
-        table.getItems().clear(); // удаление всех элементов из ObservableList
+    public void showSQLQuery() throws SQLException, ClassNotFoundException {
+        if (updateTableLock == true) {
+            table.getColumns().clear(); // удаление всех столбцов из таблицы
+            table.getItems().clear(); // удаление всех элементов из ObservableList
 
-        if (!listObject.isEmpty()) {
-            Map<String, Object> firstRow = listObject.get(0);
+            if (!listObject.isEmpty()) {
+                Map<String, Object> firstRow = listObject.get(0);
 
-            for (String columnName : firstRow.keySet()) {
-                TableColumn<Map<String, Object>, String> column = new TableColumn<>(columnName);
-                column.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().get(columnName).toString()));
-                table.getColumns().add(column);
+                for (String columnName : firstRow.keySet()) {
+                    TableColumn<Map<String, Object>, String> column = new TableColumn<>(columnName);
+                    column.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().get(columnName).toString()));
+                    table.getColumns().add(column);
+                }
+
+                ObservableList<Map<String, Object>> data = FXCollections.observableArrayList(listObject);
+
+                table.setItems(data);
+                table.refresh();
             }
-
-            ObservableList<Map<String, Object>> data = FXCollections.observableArrayList(listObject);
-
-            table.setItems(data);
-            table.refresh();
+        } else {
+            if (currentTable.equals("Client")) {
+                showSQLClient();
+            } else if (currentTable.equals("ContractDev")) {
+                showSQLContractDev();
+            } else if (currentTable.equals("TechDoc")) {
+                showSQLTechDoc();
+            } else if (currentTable.equals("Worker")) {
+                showSQLWorker();
+            } else if (currentTable.equals("Project")) {
+                showSQLProject();
+            } else if (currentTable.equals("ContractWork")) {
+                showSQLContractWork();
+            } else if (currentTable.equals("Task")) {
+                showSQLTask();
+            } else if (currentTable.equals("Status")) {
+                showSQLStatus();
+            } else if (currentTable.equals("ExecutorTask")) {
+                showSQLExecutorTask();
+            } else if (currentTable.equals("ExecutorProject")) {
+                showSQLExecutorProject();
+            }
         }
+    }
+
+    public static void setListObject(ArrayList<Map<String, Object>> setterListObject) {
+        listObject = setterListObject;
+        updateTableLock = true;
+    }
+
+    public ArrayList<Map<String, Object>> getListObject() {
+        return listObject;
     }
 
     public void handleAddElementWindow(ActionEvent event) throws IOException {
@@ -687,6 +741,17 @@ public class ShowController {
 
     public void handleFindElementWindow(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("find-element.fxml"));
+        Parent root = loader.load();
+        Stage stage = new Stage();
+        stage.getIcons().add(new Image(getClass().getResourceAsStream("lildesk.png")));
+
+        stage.setTitle("Поиск записи");
+        stage.setScene(new Scene(root));
+        stage.show();
+    }
+
+    public void handleSQLQueryWindow(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("sql-query.fxml"));
         Parent root = loader.load();
         Stage stage = new Stage();
         stage.getIcons().add(new Image(getClass().getResourceAsStream("lildesk.png")));

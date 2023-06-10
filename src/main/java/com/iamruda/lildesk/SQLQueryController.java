@@ -1,6 +1,5 @@
 package com.iamruda.lildesk;
 
-import com.iamruda.lildesk.tables.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
@@ -19,66 +18,70 @@ import javafx.stage.StageStyle;
 
 import java.io.IOException;
 import java.sql.*;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class FindElemController {
-    @FXML private SplitMenuButton chooser_table;
-    @FXML private TextField chooser_column;
-    @FXML private TextField chooser_value;
-    private String current_table;
+public class SQLQueryController {
+    @FXML private RadioButton typeQuery;
+    @FXML private TextField fieldSQLQuery;
 
     @FXML
     public void initialize() {
         ;
     }
 
-    public void chooseTable(ActionEvent event) throws IOException, SQLException, ClassNotFoundException {
-        String menuItemText = ((MenuItem)event.getSource()).getText();
-        this.current_table = ((MenuItem)event.getSource()).getId();
-        chooser_table.setText(menuItemText);
-        System.out.println(this.current_table);
-    }
 
-    public void handleFindButton(ActionEvent event) throws IOException, SQLException, ClassNotFoundException {
-        if ((current_table != null) && !(chooser_column.getText().equals("")) && !(chooser_value.getText().equals(""))) {
-            // Получаем соединение к базе данных MySQL.
-            Connection conn = MySQLConnUtils.getMySQLConnection();
+    public void handleQueryButton(ActionEvent event) throws IOException, SQLException, ClassNotFoundException {
+        if (!(fieldSQLQuery.getText().equals(""))) {
+            if (typeQuery.isSelected() == true) {
+                // Получаем соединение к базе данных MySQL.
+                Connection conn = MySQLConnUtils.getMySQLConnection();
 
-            // Создаем объект Statement для выполнения запросов.
-            Statement statement = conn.createStatement();
+                // Создаем объект Statement для выполнения запросов.
+                Statement statement = conn.createStatement();
 
-            // Выполняем запрос SELECT
-            ResultSet resultSet = statement.executeQuery("SELECT * FROM " + current_table + " WHERE " + chooser_column.getText() + " = " + chooser_value.getText());
+                // Выполняем запрос SELECT
+                ResultSet resultSet = statement.executeQuery(fieldSQLQuery.getText());
 
-            ArrayList<Map<String, Object>> listObject = new ArrayList<>();
+                ArrayList<Map<String, Object>> listObject = new ArrayList<>();
 
-            ResultSetMetaData metaData = resultSet.getMetaData();
-            int columnCount = metaData.getColumnCount();
+                ResultSetMetaData metaData = resultSet.getMetaData();
+                int columnCount = metaData.getColumnCount();
 
-            while (resultSet.next()) {
-                Map<String, Object> row = new HashMap<>();
+                while (resultSet.next()) {
+                    Map<String, Object> row = new HashMap<>();
 
-                for (int i = 1; i <= columnCount; i++) {
-                    String columnName = metaData.getColumnName(i);
-                    Object value = resultSet.getObject(i);
-                    row.put(columnName, value);
+                    for (int i = 1; i <= columnCount; i++) {
+                        String columnName = metaData.getColumnName(i);
+                        Object value = resultSet.getObject(i);
+                        row.put(columnName, value);
+                    }
+
+                    listObject.add(row);
                 }
 
-                listObject.add(row);
-            }
+                System.out.println(listObject);
+                ShowController.setListObject(listObject);
+                conn.close();
+            } else {
+                // Получаем соединение к базе данных MySQL.
+                Connection conn = MySQLConnUtils.getMySQLConnection();
 
-            System.out.println(listObject);
-            ShowController.setListObject(listObject);
-            conn.close();
+                // Создаем объект Statement для выполнения запросов.
+                Statement statement = conn.createStatement();
+
+                // Выполняем запрос SELECT
+                statement.executeUpdate(fieldSQLQuery.getText());
+                System.out.println(fieldSQLQuery.getText());
+                conn.close();
+            }
 
             handleCloseButton(event);
         } else {
             Node source = (Node) event.getSource();
             Stage currentStage = (Stage) source.getScene().getWindow();
-            String strError = "Ошибка. Не удалось произвести поиск.";
+            String strError = "Ошибка. Не удалось выполнить SQL-запрос.";
             ErrorPopup(currentStage, strError);
         }
     }

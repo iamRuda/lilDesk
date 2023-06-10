@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox fx:id="mainVBox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="169.0" prefWidth="453.0" style="-fx-background-color: #333;" stylesheets="@menu-style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.iamruda.lildesk.FindElemController">
+<VBox fx:id="mainVBox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="220.0" prefWidth="453.0" style="-fx-background-color: #333;" stylesheets="@menu-style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.iamruda.lildesk.FindElemController">
    <children>
       <HBox alignment="CENTER" prefHeight="55.0" prefWidth="396.0">
          <children>
@@ -67,6 +67,15 @@
                   <Insets bottom="4.0" top="4.0" />
                </HBox.margin>
             </TextField>
+         </children>
+      </HBox>
+      <HBox alignment="CENTER" prefHeight="48.0" prefWidth="454.0">
+         <children>
+            <Label prefHeight="40.0" prefWidth="399.0" text="* Не забудьте обновить графический клиент, в строке меню: Файл --&gt; Обновить." textFill="WHITE" wrapText="true">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
          </children>
       </HBox>
       <HBox alignment="CENTER_RIGHT" prefHeight="37.0" prefWidth="400.0">

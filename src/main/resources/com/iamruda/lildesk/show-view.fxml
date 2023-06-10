@@ -27,6 +27,7 @@
                         <MenuItem mnemonicParsing="false" onAction="#showSQLExecutorTask" text="Исполнители задач" />
                      </items>
                   </Menu>
+                  <MenuItem mnemonicParsing="false" onAction="#showSQLQuery" text="Обновить" />
                   <MenuItem mnemonicParsing="false" onAction="#handleCloseButton" text="Закрыть" />
                </items>
             </Menu>
@@ -37,6 +38,7 @@
                   <MenuItem mnemonicParsing="false" onAction="#handleDeleteElementWindow" text="Удалить запись" />
                   <SeparatorMenuItem mnemonicParsing="false" />
                   <MenuItem mnemonicParsing="false" onAction="#handleFindElementWindow" text="Найти" />
+                  <MenuItem mnemonicParsing="false" onAction="#handleSQLQueryWindow" text="SQL-запрос" />
                </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Справка">
